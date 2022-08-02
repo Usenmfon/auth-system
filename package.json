@@ -1,0 +1,45 @@
+{
+  "name": "auth-system",
+  "version": "1.0.0",
+  "description": "An authentication and authorization system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Usenmfon/auth-system.git"
+  },
+  "keywords": [
+    "nodejs",
+    "bcryptjs",
+    "expressjs",
+    "mongodb",
+    "mongoose",
+    "cors",
+    "jwt"
+  ],
+  "author": "Usenmfon Uko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Usenmfon/auth-system/issues"
+  },
+  "homepage": "https://github.com/Usenmfon/auth-system#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.7.7",
+    "validator": "^13.7.0",
+    "validatorjs": "^3.22.1"
+  }
+}
