@@ -36,3 +36,23 @@ exports.getStaffProfile = async function (id) {
       })
     return user
 }
+
+exports.getManagerProfile = async function (id) {
+    const user = UserSchema.findById(id)
+      .select([...userSelectFields])
+      .lean()
+      .catch(e => {
+        return { error: parseDBError(e) }
+      })
+    return user
+}
+
+exports.getAdminProfile = async function (id) {
+    const user = UserSchema.findById(id)
+      .select([...userSelectFields])
+      .lean()
+      .catch(e => {
+        return { error: parseDBError(e) }
+      })
+    return user
+}

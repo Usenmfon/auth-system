@@ -2,7 +2,7 @@ const { parseDBError } = require("../../mixin/errorHandlers")
 const { UserSchema, ResetTokenSchema } = require("../../model/user")
 const { randomInt } = require('crypto')
 const { sendMail } = require("../../../config/mail")
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 
 
 exports.login = async function (data) {
