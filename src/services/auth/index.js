@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 
 exports.login = async function (data) {
   return UserSchema.findOne({ email: data.email })
-    .select(['email', 'fullname', 'phone',  'password', 'type'])
+    .select(['email', 'fullname', 'phone',  'password', 'role'])
     .then(async (user) => {
       if (!user) {
         return { error: 'email does not exist ' }

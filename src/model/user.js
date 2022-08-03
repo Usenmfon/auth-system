@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { default: isEmail } =  require('validator/lib/isEmpty')
+const { default: isEmail } =  require('validator/lib/isEmail')
 const { default: isMobilePhone } =  require('validator/lib/isMobilePhone')
 
 const UserSchema = mongoose.Schema({
@@ -22,4 +22,15 @@ const UserSchema = mongoose.Schema({
   }, {
     timestamps: true
   });
+
+const ResetToken = mongoose.Schema({
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', unique: true },
+  code: { type: Number, required: true },
+  attempt: { type: Number, default: 0 },
+  type: { type: String, default: 'password', enum: ['password'] },
+
+}, { timestamps: true })
+
+exports.UserSchema = mongoose.model('User', UserSchema);
+exports.ResetTokenSchema = mongoose.model('ResetToken', ResetToken);
   

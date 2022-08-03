@@ -8,7 +8,6 @@ const { userSelectFields } = require("../serializers")
 
 exports.updateUserProfile = async function (id, data, avatar) {
   if (avatar) data.avatar = avatar.filename
-  
     const user = await UserSchema.findByIdAndUpdate(id, { $set: data }, { new: true, runValidators: true })
       .select([...userSelectFields])
       .lean()
@@ -19,6 +18,16 @@ exports.updateUserProfile = async function (id, data, avatar) {
 }
 
 exports.getUserProfile = async function (id) {
+    const user = UserSchema.findById(id)
+      .select([...userSelectFields])
+      .lean()
+      .catch(e => {
+        return { error: parseDBError(e) }
+      })
+    return user
+}
+
+exports.getStaffProfile = async function (id) {
     const user = UserSchema.findById(id)
       .select([...userSelectFields])
       .lean()

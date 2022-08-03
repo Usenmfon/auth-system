@@ -1,2 +1,2 @@
 
-exports.userSelectFields = ['fullname', 'email', 'phone', 'avatar', 'location', 'type']
+exports.userSelectFields = ['fullname', 'email', 'phone', 'location', 'role']

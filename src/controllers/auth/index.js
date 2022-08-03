@@ -13,10 +13,10 @@ const jwt = require('jsonwebtoken');
 
 
 function auth(user) {
-  const data = { id: user._id, email: user.email, type: user.type}
+  const data = { id: user._id, email: user.email, role: user.role}
   // const token = jwt.sign({ data: data }, JWT_TOKEN, { expiresIn: 60 * 15 })
   const token = jwt.sign({ data: data }, JWT_TOKEN)
-  return { token: token, email: user.email, type: user.type, firstname: user.firstname,lastname:user.lastname }
+  return { token: token, email: user.email, role: user.role, firstname: user.firstname,lastname:user.lastname }
 }
 
 
