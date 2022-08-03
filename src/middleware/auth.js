@@ -27,7 +27,7 @@ exports.isStaff = (req, res, next) => {
   if (req.user.role >= 1) {
     next()
   } else {
-    return res.status(403).json({ message: "Staff Permission denied" })
+    return res.status(403).json({ message: "Permission denied" })
   }
 }
 
