@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { JWT_TOKEN } = require('../../config/secret')
+const { isActiveUser } = require('../services/auth')
 
 const tokenSecret = JWT_TOKEN
 
@@ -11,8 +12,13 @@ exports.isAuthenticated = (req, res, next) => {
           if (err) {
               return res.status(403).json({ message: 'invalid authenticate token' })
             } 
-        req.user = value.data
-      next()
+      req.user = value.data
+      const isActive = await isActiveUser(req.user.id)
+      if (isActive) {
+        next()
+      } else {
+        return res.status(403).json({ error: 'expired token' })
+      }
     })
   }
 }

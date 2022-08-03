@@ -2,7 +2,7 @@ const { JWT_TOKEN } = require("../../../config/secret")
 const { DataValidator, loginRules, signUpRules } = require("../../../config/validators")
 const { parseValidationError } = require("../../mixin/errorHandlers")
 const { parseResponse } = require("../../mixin/response")
-const { signUp, login, sendPasswordResetLink, resetPassword } = require("../../services/auth")
+const { signUp, login, sendPasswordResetLink, resetPassword, logOut } = require("../../services/auth")
 
 const jwt = require('jsonwebtoken');
 // const { EventEmitter } = require("../../../config/event")
@@ -16,6 +16,8 @@ function auth(user) {
   const data = { id: user._id, email: user.email, role: user.role}
   // const token = jwt.sign({ data: data }, JWT_TOKEN, { expiresIn: 60 * 15 })
   const token = jwt.sign({ data: data }, JWT_TOKEN)
+  user.isActive = true
+  user.save()
   return { token: token, email: user.email, role: user.role, firstname: user.firstname,lastname:user.lastname }
 }
 
@@ -84,6 +86,14 @@ exports.login = async function (req, res, next) {
   parseResponse(req, response)
   next()
 }
+
+exports.logOut = async function (req, res) {
+    const resp = await logOut(req.user.id)
+    if (resp.error) {
+      return res.status(400).send(resp.error)
+    }
+    return res.status(204).send()
+  }
 
 exports.forgotPassword = async function (req, res) {
   const email = req.body?.email

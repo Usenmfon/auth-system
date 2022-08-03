@@ -43,6 +43,28 @@ exports.signUp = async function (data) {
   })
 }
 
+exports.logOut = async function (id) {
+    try {
+      const user = UserSchema.findByIdAndUpdate(id, { isActive: false }, { new: true }).catch(e => {
+        return { error: parseDBError(e) }
+      })
+      return user
+  
+    } catch (error) {
+  
+      return { error: parseDBError(error) }
+    }
+  }
+  
+ exports.isActiveUser = async function (id) {
+    try {
+      const user = await UserSchema.findById(id).lean()
+      return user.isActive
+    } catch (error) {
+      return { error: parseDBError(error) }
+    }
+  }
+
 exports.sendPasswordResetLink = async function (email) {
   const user = await UserSchema.findOne({ email: email }).catch(e => {
     return { error: parseDBError(e) }
